@@ -37,7 +37,7 @@ MSEd <- function(model, n, sd0, a) {
   # 计算统计量
   source("select_h.R")
   h1_values <- seq(0.1, 1, by = 0.01) 
-  h2_values <- seq(0.5, 3, by = 0.01) 
+  h2_values <- seq(0.5, 3, by = 0.03) 
   #设置窗宽
   HH <- besth1(sd0, h1_values, h2_values, X, Y, a, noise)
   h1 <- HH$best_h1 
@@ -128,7 +128,7 @@ calculate_MSE <- function(N, model, n, sd0, a) {
 }
 
 # 设置参数
-N <- 388
+N <- 30
 model <- 1
 #ns <- c(50, 100, 200, 500, 1000)
 n <-100

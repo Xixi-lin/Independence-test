@@ -61,12 +61,28 @@ DC<-function(W, Y0, n, sd0, N){ #W=X+u N=1000 #重排次数/组
       valid_pp03 <- remove_invalid_values(F3[, pp])
       F03[pp]=1/n*sum(log(valid_pp03))
     }
-    # 计算并存储分位数
-    quantiles1 <- quantile(F01, 0.95)
-    quantiles2 <- quantile(F02, 0.95)
-    quantiles3 <- quantile(F03, 0.95)
-   
-    return(list(f01, f02, f03, quantiles1, quantiles2, quantiles3, h1, h2, h3))
-    
+  # 计算并存储分位数
+  quantiles1 <- quantile(F01, 0.99)
+  quantiles2 <- quantile(F02, 0.99)
+  quantiles3 <- quantile(F03, 0.99)
+  
+  quantiles4 <- quantile(F01, 0.97)
+  quantiles5 <- quantile(F02, 0.97)
+  quantiles6 <- quantile(F03, 0.97)
+  
+  quantiles7 <- quantile(F01, 0.95)
+  quantiles8 <- quantile(F02, 0.95)
+  quantiles9 <- quantile(F03, 0.95)
+  
+  quantiles10 <- quantile(F01, 0.93)
+  quantiles11 <- quantile(F02, 0.93)
+  quantiles12 <- quantile(F03, 0.93)
+  
+  quantiles13 <- quantile(F01, 0.90)
+  quantiles14 <- quantile(F02, 0.90)
+  quantiles15 <- quantile(F03, 0.90)
+  
+  return(list(f01, f02, f03, quantiles1, quantiles2, quantiles3, quantiles4, quantiles5, quantiles6, quantiles7, quantiles8, quantiles9, quantiles10, quantiles11, quantiles12, quantiles13, quantiles14, quantiles15))
+  
 }
 

@@ -1,12 +1,18 @@
-DC<-function(W, Y0, n, sd0, N){ #W=X+u N=1000 #重排次数/组
+DC<-function(W,Y0,n,sd0,N,a,b){ #W=X+u N=1000 #重排次数/组
   source("select_h.R")
-#模拟  
-  h1_values <- seq(0.02, 10, by = 0.1) 
-  h2_values <- seq(0.02, 10, by = 0.1) 
+  
+  h1_values <- seq(0.1, 1, by = 0.01) 
+  h2_values <- seq(0.5, 3, by = 0.03) 
+  
   #设置窗宽
-  HH<-optimalh2(sd0, h1_values, h2_values, Y0, W) #model3,4: 1-N, 2-D
-  h1=HH$optimal_h1 
-  h2=HH$optimal_h2
+  HH<-besth1(sd0, h1_values, h2_values, W, Y0, a, b) #1-model1, 2-model2
+  h1=HH$best_h1 
+  h2=HH$best_h2 
+  #HH<-optimalh1(sd0, h1_values, h2_values, Y0, W) #model3,4: 1-N, 2-D
+  #h1=HH$optimal_h1 
+  #h2=HH$optimal_h2
+  #h1=0.08
+  #h2=1.77 #1.29
   h3=h2
   
   #DC
@@ -62,11 +68,27 @@ DC<-function(W, Y0, n, sd0, N){ #W=X+u N=1000 #重排次数/组
       F03[pp]=1/n*sum(log(valid_pp03))
     }
     # 计算并存储分位数
-    quantiles1 <- quantile(F01, 0.95)
-    quantiles2 <- quantile(F02, 0.95)
-    quantiles3 <- quantile(F03, 0.95)
+    quantiles1 <- quantile(F01, 0.99)
+    quantiles2 <- quantile(F02, 0.99)
+    quantiles3 <- quantile(F03, 0.99)
+    
+    quantiles4 <- quantile(F01, 0.97)
+    quantiles5 <- quantile(F02, 0.97)
+    quantiles6 <- quantile(F03, 0.97)
+    
+    quantiles7 <- quantile(F01, 0.95)
+    quantiles8 <- quantile(F02, 0.95)
+    quantiles9 <- quantile(F03, 0.95)
+    
+    quantiles10 <- quantile(F01, 0.93)
+    quantiles11 <- quantile(F02, 0.93)
+    quantiles12 <- quantile(F03, 0.93)
+    
+    quantiles13 <- quantile(F01, 0.90)
+    quantiles14 <- quantile(F02, 0.90)
+    quantiles15 <- quantile(F03, 0.90)
    
-    return(list(f01, f02, f03, quantiles1, quantiles2, quantiles3, h1, h2, h3))
+    return(list(f01, f02, f03, quantiles1, quantiles2, quantiles3, quantiles4, quantiles5, quantiles6, quantiles7, quantiles8, quantiles9, quantiles10, quantiles11, quantiles12, quantiles13, quantiles14, quantiles15))
     
 }
 
